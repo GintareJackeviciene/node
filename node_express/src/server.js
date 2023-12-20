@@ -1,22 +1,38 @@
+require('dotenv').config();// ikels .env reiksmes i process .env
 const express = require('express');
 const morgan = require('morgan');
 const cors = require('cors');
 
 const app = express();
-const port = 3000;
+const port = process.env.PORT || 3000;
+
+// console.log(process.env.PASS);
 
 let users = [
   {
-    id: 1, name: 'James', town: 'London', isDriver: false,
+    id: 1,
+    name: 'James',
+    town: 'London',
+    isDriver: false,
+    isDeleted: false,
   },
   {
-    id: 2, name: 'Mike', town: 'Kaunas', isDriver: true,
+    id: 2,
+    name: 'Mike',
+    town: 'Kaunas',
+    isDriver: true,
   },
   {
-    id: 3, name: 'Bob', town: 'Vilnius', isDriver: false,
+    id: 3,
+    name: 'Bob',
+    town: 'Vilnius',
+    isDriver: false,
   },
   {
-    id: 4, name: 'Jane', town: 'Klaipeda', isDriver: true,
+    id: 4,
+    name: 'Jane',
+    town: 'Klaipeda',
+    isDriver: true,
   },
 ];
 
@@ -78,15 +94,61 @@ app.delete('/api/users/:userId', (request, response) => {
 app.post('/api/users', (req, res) => {
   // console.log(req.body)
   // sukuriam nauja useri
+  // const newUser = {
+  //   id: +Math.random().toString().slice(3),
+  //   name: req.body.name,
+  //   town: req.body.town,
+  //   isDriver: req.body.isDriver,
+  // };
+  const { name, town, isDriver } = req.body;
+
+  // mini validation
+  if (name.trim().length === 0) {
+    res.status(400).json({
+      field: 'name',
+      error: 'name required field',
+    });
+    return;
+  }
   const newUser = {
-    id: Math.random().toString().slice(3),
-    name: req.body.name,
-    town: req.body.town,
-    isDriver: req.body.isDriver,
+    id: +Math.random().toString().slice(3),
+    name,
+    town,
+    isDriver,
   };
+  // const newUser = {
+  //   id: +Math.random().toString().slice(3),
+  //   ...req.body,
+  // };
   console.log(newUser);
   users.push(newUser);
   res.sendStatus(201);
+});
+
+// PUT -/api/users/2 -updates users with id 2 object
+app.put('/api/users/:userId', (req, res) => {
+  const userId = +req.params.userId;
+  // surasti ir pakeisti esama objekta
+  const foundIdx = users.findIndex((uObj) => uObj.id === userId);
+  // found.name = req.body.name;
+  // found.town = req.body.town;
+  // found.isDriver = req.body.isDriver;
+  users[foundIdx] = {
+    id: userId,
+    ...req.body,
+  };
+  // console.log(found);
+  // grazinsim pakeista masyva i fronta
+  res.json(users);
+});
+
+// catch all route 404 case
+app.all('*', (req, res) => {
+  res.status(500).json({
+    msg: 'Something went wrong',
+    method: req.method,
+    url: req.url,
+  });
 });
 
 app.listen(port, () => {

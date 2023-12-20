@@ -13,7 +13,7 @@ GET http://localhost:3000/api/users/town
 GET http://localhost:3000/api/users/2
 
 ### delete a user
-DELETE http://localhost:3000/api/users/1
+DELETE http://localhost:3000/api/users/2
 
 ###
 GET https://jsonplaceholder.typicode.com/users
