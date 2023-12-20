@@ -1,0 +1,29 @@
+GET http://localhost:3000
+
+### get all users
+GET http://localhost:3000/api/users
+
+### get all drivers
+GET http://localhost:3000/api/users/drivers
+
+### get all towns
+GET http://localhost:3000/api/users/town
+
+### get Single user
+GET http://localhost:3000/api/users/2
+
+### delete a user
+DELETE http://localhost:3000/api/users/1
+
+###
+GET https://jsonplaceholder.typicode.com/users
+
+### Creat post
+POST https://jsonplaceholder.typicode.com/posts
+Content-Type:  application/json
+
+{
+    "userId": 50,
+  "title": "new post",
+  "body": "body of new post"
+}
