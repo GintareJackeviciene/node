@@ -22,7 +22,7 @@ let users = [
 
 app.use(morgan('dev'));
 app.use(cors()); // to fix cors errror
-//jei norim i req.body gauti json
+// jei norim i req.body gauti json
 app.use(express.json());
 
 // ROUTES
