@@ -3,6 +3,9 @@ GET http://localhost:3000
 ### get all users
 GET http://localhost:3000/api/users
 
+### get all books
+DELETE http://localhost:3000/api/books/2
+
 ### get all drivers
 GET http://localhost:3000/api/users/drivers
 
@@ -24,13 +27,24 @@ Content-Type:  application/json
 
 {
    
-   "name" : "Mike",
+   "name" : "sdzdszd",
     "town" :"Kazkur", 
     "isDriver": false
 }
 
 ### Update user
-POST http://localhost:3000/api/users/2
+Put http://localhost:3000/api/users/1
+Content-Type:  application/json
+
+{
+   
+   "name" : "niekas",
+    "town" :"Kazkur", 
+    "isDriver": true
+}
+
+### test
+POST http://localhost:3000/api/test
 Content-Type:  application/json
 
 {
