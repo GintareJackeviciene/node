@@ -1,13 +1,12 @@
-import Users from "./components/Users";
-
+//import Users from "./components/Users";
+import Login from './components/auth/Login'
 
 function App() {
   return (
     <div className='container'>
-      <h1>Hello vite</h1>
-      <Users/>
+      <Login/>
     </div>
   );
 }
 
-export default App
+export default App;
